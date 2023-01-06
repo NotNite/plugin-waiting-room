@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+html {
+  width: 100vw;
+  height: 100vh;
+
+  font-family: "Inter", sans-serif;
+  font-weight: 100;
+}
+
+body {
+  margin: 0;
+  background-color: #000;
+  color: #fff;
+}
+
+.bottom-left {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.info {
+  color: #fff;
+
+  padding: 2px 2px;
+  font-size: 10px;
+  background-color: #000;
+  opacity: 50%;
+}
+
+a {
+  color: #fff;
+}
+
+.stuff {
+  position: absolute;
+  top: 0;
+
+  padding: 1em 1em;
+}
+
+.stuff p {
+  margin: 0;
+}
+
+.bg {
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+
+  filter: blur(5px);
+}
+
+h4 {
+  margin: 1rem 0;
+}
+
+.horse-button {
+  opacity: 30%;
+
+  width: 64px;
+  height: 64px;
+}
+
+.horse-button:hover {
+  opacity: 100%;
+}
+
+.emoji {
+  animation: emoji-fade 5s ease-in-out 0s infinite alternate;
+}
+
+@keyframes emoji-fade {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    bottom: 85%;
+    opacity: 0;
+  }
+}
+
+.horse-containment-zone {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+.horse-containment-zone img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+.bg-fade-out {
+  animation: bg-fade-out 2s ease-in-out 0s infinite alternate;
+}
+
+@keyframes bg-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

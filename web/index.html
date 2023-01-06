@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Plugin Waiting Room</title>
+    <meta
+      name="description"
+      content="Chill out with fellow XIVLauncher fans while you wait for Dalamud to come back up"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="horse.png" />
+    <meta property="og:image" content="/horse.png" />
+
+    <!-- I'm so sorry, any webdevs reading this -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/plugin/relativeTime.js"></script>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+  </head>
+  <body>
+    <main>
+      <div class="stuff">
+        <h2 id="sound-warning" style="color: #f00">Click to play sound.</h2>
+        <p id="people-count"></p>
+        <p id="timer"></p>
+        <p id="now-playing"></p>
+      </div>
+
+      <div class="horse-containment-zone"></div>
+
+      <div class="bottom-left">
+        <div class="horse-button">
+          <img
+            src="horse.png"
+            width="100%"
+            height="100%"
+            alt="Click to dispatch horses!"
+          />
+        </div>
+        <div class="info">
+          Made by
+          <a
+            href="https://notnite.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >NotNite</a
+          >. Music by
+          <a
+            href="https://www.youtube.com/@malrd"
+            target="_blank"
+            rel="noopener noreferrer"
+            >malrd</a
+          >.
+
+          <br />
+          <input
+            type="range"
+            id="volume-slider"
+            style="width: 100%; margin: 0"
+            min="0"
+            max="100"
+            value="50"
+          />
+        </div>
+      </div>
+    </main>
+
+    <script src="index.js" async defer></script>
+  </body>
+</html>
