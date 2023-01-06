@@ -70,7 +70,7 @@ function spawnVideo() {
 spawnVideo();
 
 function playDuckbeat() {
-  duckbeatVol = Math.floor(Math.random() * 5) + 1;
+  duckbeatVol = Math.floor(Math.random() * 10) + 1;
 
   soundFile.src = `duckbeats/vol${duckbeatVol}.mp3`;
   soundFile.play();
