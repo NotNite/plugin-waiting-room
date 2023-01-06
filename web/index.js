@@ -38,7 +38,11 @@ const videos = [
   "sharlayan.webm",
   "kugane2.webm", // by WildWolf
   "radz.webm", // by WildWolf
-  "wolves_den.webm" // by WildWolf
+  "wolves_den.webm", // by WildWolf
+  "3597.webm", // by Valk
+  "3879.webm", // by Valk
+  "6778.webm", // by Valk
+  "9580.webm" // by Valk
 ];
 const bag = [];
 
