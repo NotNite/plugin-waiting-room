@@ -191,7 +191,7 @@ function updateHPS() {
   // remove horses we sent from serverHps, if we did
   if (localHps > 0) {
     // we can only send a max of two horse
-    const cappedLocalHps = Math.max(localHps, 2);
+    const cappedLocalHps = Math.min(localHps, 2);
     totalHps -= cappedLocalHps;
   }
 
