@@ -14,6 +14,18 @@ function updateUsers() {
   });
 }
 
+let hps = 0;
+let lastHps = 0;
+
+setInterval(() => {
+  lastHps = hps;
+  hps = 0;
+
+  users.forEach((user) => {
+    user[0].send(JSON.stringify({ type: "hps", hps: lastHps }));
+  });
+}, 1000);
+
 wss.on("connection", (ws, req) => {
   const ip = req.headers["cf-connecting-ip"];
 
@@ -69,6 +81,7 @@ wss.on("connection", (ws, req) => {
 
         usedHorse = true;
         clicks[ip] = clicks[ip] ? clicks[ip] + 1 : 1;
+        hps++;
       }
     } catch (e) {}
   });

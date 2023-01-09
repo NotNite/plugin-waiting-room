@@ -242,6 +242,12 @@ function handleWebsocket(event) {
       )}" target="_blank" rel="noopener noreferrer">View commit</a>`
     );
   }
+
+  if (data.type === "hps") {
+    document.querySelector(
+      "#hps"
+    ).textContent = `Horses per second: ${data.hps}`;
+  }
 }
 
 function setupWebsocket() {
