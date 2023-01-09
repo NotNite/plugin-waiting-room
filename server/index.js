@@ -18,6 +18,7 @@ let hps = 0;
 let lastHps = 0;
 
 setInterval(() => {
+  if (hps === lastHps) return;
   lastHps = hps;
   hps = 0;
 
