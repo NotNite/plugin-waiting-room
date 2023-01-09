@@ -179,12 +179,32 @@ const wsUrl =
 
 let ws = null;
 
+let people = 0;
+let localHps = 0;
+let serverHps = 0;
+
+function updateHPS() {
+  // cap in case we desync
+  const cappedServerHps = Math.min(serverHps, people * 2);
+
+  let totalHps = localHps + cappedServerHps;
+  // remove horses we sent from serverHps, if we did
+  if (localHps > 0) {
+    // we can only send a max of two horse
+    const cappedLocalHps = Math.max(localHps, 2);
+    totalHps -= cappedLocalHps;
+  }
+
+  document.querySelector("#hps").textContent = `Horses per second: ${totalHps}`;
+}
+
 function handleWebsocket(event) {
   const data = JSON.parse(event.data);
 
   // this could be a switch case
   // but it's not
   if (data.type === "userUpdate") {
+    people = data.users;
     const users = data.users - 1;
 
     if (users === 0) {
@@ -244,9 +264,7 @@ function handleWebsocket(event) {
   }
 
   if (data.type === "hps") {
-    document.querySelector(
-      "#hps"
-    ).textContent = `Horses per second: ${data.hps}`;
+    serverHps = data.hps;
   }
 }
 
@@ -264,6 +282,7 @@ setupWebsocket();
 
 const horseButton = document.querySelector(".horse-button");
 let horsed = false;
+
 horseButton.addEventListener("click", () => {
   if (!horsed) {
     // There's serverside rate limiting here, but this saves us bandwidth
@@ -272,9 +291,16 @@ horseButton.addEventListener("click", () => {
     horsed = true;
   }
 
+  localHps++;
+
   spawnHorse();
 });
 
 setInterval(() => {
   horsed = false;
 }, 500);
+
+setInterval(() => {
+  updateHPS();
+  localHps = 0;
+}, 1000);
