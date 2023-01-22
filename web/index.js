@@ -102,7 +102,7 @@ const peopleCount = document.querySelector("#people-count");
 const timer = document.querySelector("#timer");
 
 dayjs.extend(dayjs_plugin_relativeTime);
-const maintenance = dayjs.unix(1673316000);
+const maintenance = dayjs.unix(1674540000);
 
 function updateTimer() {
   const time = maintenance.fromNow();
