@@ -102,7 +102,7 @@ const peopleCount = document.querySelector("#people-count");
 const timer = document.querySelector("#timer");
 
 dayjs.extend(dayjs_plugin_relativeTime);
-const maintenance = dayjs.unix(1674540000);
+const maintenance = dayjs.unix(1684836000);
 
 function updateTimer() {
   const time = maintenance.fromNow();
@@ -140,6 +140,7 @@ function doMessage(iconURL, title, desc) {
   image.src = iconURL;
   image.style.width = "128px";
   image.style.height = "128px";
+  image.style.borderRadius = "8px";
   div.appendChild(image);
 
   const text = document.createElement("div");
@@ -175,7 +176,7 @@ function sanitize(text) {
 const wsUrl =
   location.hostname === "localhost"
     ? "ws://localhost:7310/"
-    : "wss://plogon.com/ws";
+    : "wss://plogon.dev/ws";
 
 let ws = null;
 
