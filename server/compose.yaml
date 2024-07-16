@@ -1,0 +1,11 @@
+services:
+  server:
+    build:
+      context: .
+    environment:
+      NODE_ENV: production
+    volumes:
+    - ./key.txt:/usr/src/app/key.txt
+    - ./clicks.json:/usr/src/app/clicks.json
+    ports:
+      - 7310:7310

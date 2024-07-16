@@ -101,20 +101,27 @@ soundFile.addEventListener("ended", () => {
 const peopleCount = document.querySelector("#people-count");
 const timer = document.querySelector("#timer");
 
-dayjs.extend(dayjs_plugin_relativeTime);
-const maintenance = dayjs.unix(1674540000);
+fetch(location.origin + "/maintenance.txt")
+  .then((r) => r.text())
+  .then((text) => {
+    const time = parseInt(text);
+    if (isNaN(time)) return;
 
-function updateTimer() {
-  const time = maintenance.fromNow();
-  const fullTime = maintenance.format("MMMM D, YYYY [at] h:mm A");
+    dayjs.extend(dayjs_plugin_relativeTime);
+    const maintenance = dayjs.unix(time);
 
-  const wentOrGo = maintenance.diff(dayjs()) > 0 ? "go" : "went";
+    function updateTimer() {
+      const time = maintenance.fromNow();
+      const fullTime = maintenance.format("MMMM D, YYYY [at] h:mm A");
 
-  timer.innerHTML = `Plugins ${wentOrGo} offline <a style="text-decoration: underline;" title="${fullTime}">${time}</a>.`;
-}
+      const wentOrGo = maintenance.diff(dayjs()) > 0 ? "go" : "went";
 
-updateTimer();
-setInterval(updateTimer, 1000);
+      timer.innerHTML = `Plugins ${wentOrGo} offline <a style="text-decoration: underline;" title="${fullTime}">${time}</a>.`;
+    }
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  });
 
 function spawnHorse(isGolden) {
   const node = document.createElement("img");
@@ -140,6 +147,7 @@ function doMessage(iconURL, title, desc) {
   image.src = iconURL;
   image.style.width = "128px";
   image.style.height = "128px";
+  image.style.borderRadius = "8px";
   div.appendChild(image);
 
   const text = document.createElement("div");
@@ -175,7 +183,7 @@ function sanitize(text) {
 const wsUrl =
   location.hostname === "localhost"
     ? "ws://localhost:7310/"
-    : "wss://plogon.com/ws";
+    : location.origin.replace("http", "ws") + "/ws";
 
 let ws = null;
 
