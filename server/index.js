@@ -28,7 +28,7 @@ setInterval(() => {
 }, 1000);
 
 wss.on("connection", (ws, req) => {
-  const ip = req.headers["cf-connecting-ip"];
+  const ip = req.headers["x-forwarded-for"];
 
   const connectionsWithThisIP = users.filter((user) => {
     return user[1] === ip;
