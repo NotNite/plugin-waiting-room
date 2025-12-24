@@ -28,7 +28,9 @@ const isChristmas = () => {
 
 if (isChristmas())
 {
-  document.getElementsByClassName("horse-button-image")[0].src = "horse_santa.png";
+  document.querySelector(
+    "#horse-button-image"
+  ).src = "horse_santa.png";
   timer.innerHTML = "Welcome to the XIVLauncher Yule Log. Grab a hot tea and enjoy your time.";
   timer.style = "font-family: cursive; font-size: 1.5em; text-shadow: 0 0 9px black;";
 }
@@ -173,7 +175,7 @@ function spawnHorse(isGolden) {
 
   node.style.left = `calc(${Math.random() * 100}% - 64px)`;
 
-  if (isChristmas())
+  if (!isChristmas())
   {
     node.src = isGolden ? "golden_horse.png" : "horse.png";
   }
