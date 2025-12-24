@@ -14,6 +14,25 @@
 
 console.log("Psst... spawnHorse();");
 
+const peopleCount = document.querySelector("#people-count");
+const timer = document.querySelector("#timer");
+
+const isChristmas = () => {
+  const now = new Date();
+  const month = now.getMonth(); // 0-11
+  const day = now.getDate();
+  
+  // December 24-31
+  return (month === 11 && day >= 24);
+};
+
+if (isChristmas())
+{
+  document.getElementsByClassName("horse-button-image")[0].src = "horse_santa.png";
+  timer.innerHTML = "Welcome to the XIVLauncher Yule Log. Grab a hot tea and enjoy your time.";
+  timer.style = "font-family: cursive; font-size: 1.5em; text-shadow: 0 0 9px black;";
+}
+
 const soundFile = document.createElement("audio");
 soundFile.volume = 0.5;
 soundFile.loop = true;
@@ -44,11 +63,20 @@ const videos = [
   "6778.webm", // by Valk
   "9580.webm" // by Valk
 ];
+const christmasVideos = [
+  "fireplace.webm", // by tom
+  "fireplace2.webm", // by naevia
+  "fireplace3.webm" // by nooj
+];
 const bag = [];
 
 function spawnVideo() {
+  const allVideos = isChristmas() ?
+    christmasVideos :
+    videos;
+
   if (bag.length <= 0) {
-    bag.push(...videos);
+    bag.push(...allVideos);
     // shuffle bag
     for (let i = bag.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -74,15 +102,30 @@ function spawnVideo() {
 spawnVideo();
 
 function playDuckbeat() {
-  duckbeatVol = Math.floor(Math.random() * 10) + 1;
+  if (isChristmas()) {
+    soundFile.src = `duckbeats/christmas.mp3`;
 
-  soundFile.src = `duckbeats/vol${duckbeatVol}.mp3`;
+    document.querySelector(
+      "#now-playing"
+    ).textContent = "";
+
+    let attrib = document.querySelector(
+      "#music-attrib"
+    );
+    attrib.textContent = "YuraSoop";
+    attrib.href = "https://freemusicarchive.org/music/yurasoop/";
+  }
+  else {
+    duckbeatVol = Math.floor(Math.random() * 10) + 1;
+    soundFile.src = `duckbeats/vol${duckbeatVol}.mp3`;
+
+    document.querySelector(
+      "#now-playing"
+    ).textContent = `Now playing: lofi beats to quack to vol${duckbeatVol}`;
+  }
+
   soundFile.play();
   soundFile.muted = false;
-
-  document.querySelector(
-    "#now-playing"
-  ).textContent = `Now playing: lofi beats to quack to vol${duckbeatVol}`;
 }
 
 let soundInit = false;
@@ -98,9 +141,7 @@ soundFile.addEventListener("ended", () => {
   if (soundInit && playingDuckbeat) playDuckbeat();
 });
 
-const peopleCount = document.querySelector("#people-count");
-const timer = document.querySelector("#timer");
-
+/*
 fetch(location.origin + "/maintenance.txt")
   .then((r) => r.text())
   .then((text) => {
@@ -122,6 +163,7 @@ fetch(location.origin + "/maintenance.txt")
     updateTimer();
     setInterval(updateTimer, 1000);
   });
+*/
 
 function spawnHorse(isGolden) {
   const node = document.createElement("img");
@@ -130,7 +172,15 @@ function spawnHorse(isGolden) {
   node.style.height = "64px";
 
   node.style.left = `calc(${Math.random() * 100}% - 64px)`;
-  node.src = isGolden ? "golden_horse.png" : "horse.png";
+
+  if (isChristmas())
+  {
+    node.src = isGolden ? "golden_horse.png" : "horse.png";
+  }
+  else
+  {
+    node.src = isGolden ? "golden_horse_santa.png" : "horse_santa.png";
+  }
 
   document.querySelector(".horse-containment-zone").appendChild(node);
 
