@@ -34,12 +34,6 @@ wss.on("connection", (ws, req) => {
     return user[1] === ip;
   });
 
-  // 2 clients per IP
-  if (connectionsWithThisIP.length >= 2) {
-    ws.close(1008, "you are why we can't have nice things");
-    return;
-  }
-
   users.push([ws, ip]);
   updateUsers();
 
